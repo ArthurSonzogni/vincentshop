@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Vincent Arnould',
+    title: 'DV Création Luxe',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -53,6 +53,9 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+
+    // Simple usage, headers function name is 'httpHeaders' by default
+    'nuxt-custom-headers',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

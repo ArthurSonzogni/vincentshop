@@ -18,50 +18,73 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
 import * as THREE from 'three'
 
-export default Vue.extend({
-  name: 'IndexPage',
-})
+export default {
+  data: () => {
+    import('@enra-gmbh/panolens').then(
+      ({ ImagePanorama, Viewer, Infospot, DataImage }) => {
+        const container = document.querySelector('#panolens') as HTMLElement
 
-import('@enra-gmbh/panolens').then(
-  ({ ImagePanorama, Viewer, Infospot, DataImage }) => {
-    const panorama1 = new ImagePanorama('/image2.jpg')
+        const panorama1 = new ImagePanorama('/image2.jpg')
+        const panorama2 = new ImagePanorama('/image1.jpg')
 
-    const panorama2 = new ImagePanorama('/image1.jpg')
+        const infospot1 = new Infospot()
+        infospot1.position.set(5000.0, -665.23, -3996.49)
+        infospot1.addHoverText('Un mur blanc', -container.offsetTop + 50)
+        panorama1.add(infospot1)
 
-    const infospot1 = new Infospot()
-    infospot1.position.set(5000.0, -665.23, -3996.49)
-    infospot1.addHoverText('Un mur blanc')
-    panorama1.add(infospot1)
+        const infospot2 = new Infospot(300, DataImage.Info)
+        const descContainer = document.getElementById(
+          'desc-container'
+        ) as HTMLElement
+        infospot2.position.set(-5000.0, -1825.25, 197.56)
+        infospot2.addHoverElement(descContainer, -container.offsetTop + 200)
+        panorama1.add(infospot2)
 
-    const infospot2 = new Infospot(300, DataImage.Info)
-    infospot2.position.set(-5000.0, -1825.25, 197.56)
-    infospot2.addHoverElement(
-      document.getElementById('desc-container') as HTMLElement,
-      200
+        const view = new Viewer({
+          container,
+          autoRotate: true,
+          autoRotateSpeed: 1,
+          autoRotateActivationDuration: 50000,
+          output: 'console',
+        })
+
+        view.add(panorama1)
+        view.add(panorama2)
+
+        // Pair
+        panorama1.link(
+          panorama2,
+          new THREE.Vector3(-1, -0.8, 0).multiplyScalar(4000)
+        )
+        panorama2.link(
+          panorama1,
+          new THREE.Vector3(+1, -0.5, 0).multiplyScalar(4000)
+        )
+
+        const loader = new THREE.TextureLoader()
+        loader.load('/sprite2.png', function (texture) {
+          const geometry = new THREE.PlaneGeometry(258 * 0.1, 693 * 0.1)
+          const material = new THREE.MeshBasicMaterial({
+            map: texture,
+            opacity: 1,
+            side: THREE.DoubleSide,
+            transparent: true,
+          })
+
+          const sprite = new THREE.Mesh(geometry, material)
+
+          sprite.position.set(-60, -10, 30)
+          const rotation = new THREE.Matrix4()
+          rotation.makeRotationAxis(new THREE.Vector3(0, 1, 0), 2)
+          view.add(sprite)
+          sprite.rotation.setFromRotationMatrix(rotation)
+        })
+      }
     )
-    panorama1.add(infospot2)
-
-    const view = new Viewer({
-      container: document.querySelector('#panolens') as HTMLElement,
-    })
-
-    view.add(panorama1)
-    view.add(panorama2)
-
-    // Pair
-    panorama1.link(
-      panorama2,
-      new THREE.Vector3(-1, -0.8, 0).multiplyScalar(4000)
-    )
-    panorama2.link(
-      panorama1,
-      new THREE.Vector3(+1, -0.5, 0).multiplyScalar(4000)
-    )
-  }
-)
+  },
+}
 </script>
 
 <style>

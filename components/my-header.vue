@@ -1,13 +1,13 @@
 <template>
-  <div id="header">
+  <header>
     <h1>Vincent Arnould</h1>
     <p>Lapidaire Pierres Précieuses Haute Joaillerie 🇫🇷</p>
-  </div>
+  </header>
 </template>
 
 <style scoped>
-#header {
-  padding: 40px;
+header {
+  padding-bottom: 40px;
   display: flex;
   align-items: center;
   flex-direction: column;
