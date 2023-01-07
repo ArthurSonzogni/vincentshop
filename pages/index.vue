@@ -1,15 +1,29 @@
 <template>
   <div id="main">
-    <MyPanolens />
+    <MyHeaderDv />
 
-    <MyHeader />
+    <MyParagraph class="dark">
+      <h2>La joaillerie</h2>
+      Une collection de bijoux prestigieux en or et en diamants inspirée des
+      jardins de l’Orangerie du Château de Versailles. Des exemplaires uniques
+      et numérotés pour un présent étincellant. Un motif doux et harmonieux
+      rappelant les jardins à la française qui saura habiller vos tenues.
+    </MyParagraph>
 
-    <MyParagraph class="dark center">
-      Depuis plus de 100 ans, la passion de Vincent Arnould anime ses créations
-      de haute joaillerie. La Maison transmet sa conception particulière du
-      métier, qui se caractérise par des sources d'inspiration envoûtantes et un
-      savoir-faire virtuose. Chaque pierre est minutieusement choisie pour sa
-      qualité remarquable et l'émotion qu'elle véhicule.
+    <MyDv />
+
+    <MyParagraph class="light">
+      <h2>Une collection & un savoir-faire</h2>
+      Une collection unique inspirée des jardins à la française et de
+      l’Orangerie du Château de Versailles.
+    </MyParagraph>
+
+    <MyParagraph class="dark">
+      <h2>IRRÉSISTIBLES TENTATIONS</h2>
+      Avec ses lignes pures imaginées par Jules Hardouin-Mansart et son jardin
+      peuplé d’orangers, de citronniers, de lauriers roses et de grenadiers,
+      l’Orangerie du Château de Versailles est à la fois un plaisir pour les
+      sens et un chef-d’œuvre de l’architecture.
     </MyParagraph>
 
     <MyParagraph class="light">
@@ -33,14 +47,6 @@
       raffinement et de luxe qui fascine et enchante depuis des siècles.
     </MyParagraph>
 
-    <MyParagraph class="dark">
-      Depuis plus de 100 ans, la passion de Vincent Arnould anime ses créations
-      de haute joaillerie. La Maison transmet sa conception particulière du
-      métier, qui se caractérise par des sources d'inspiration envoûtantes et un
-      savoir-faire virtuose. Chaque pierre est minutieusement choisie pour sa
-      qualité remarquable et l'émotion qu'elle véhicule.
-    </MyParagraph>
-
     <MyFooter />
   </div>
 </template>
@@ -53,7 +59,8 @@ p {
   padding: 0;
 }
 
-html {
+html,
+body {
   overflow-x: hidden;
 }
 
@@ -67,5 +74,27 @@ body {
 a:link,
 a:visited {
   color: #bdc3c7;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(128 128 128 / 50%);
+  border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(128 128 128 / 100%);
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 </style>

@@ -20,7 +20,7 @@
 }
 
 .paragraph-container.dark {
-  background-color: rgb(0 0 0 / 5%);
+  background-color: rgb(0 0 100 / 5%);
 }
 
 .paragraph-container.center {
