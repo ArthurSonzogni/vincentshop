@@ -28,60 +28,80 @@
 <script lang="ts">
 import * as THREE from 'three'
 
+let once = false
+const main = async () => {
+  if (once) return
+  once = true
+  const { ImagePanorama, Viewer, Infospot } = await import(
+    '@enra-gmbh/panolens'
+  )
+  const container = document.querySelector('#panolens') as HTMLElement
+  const descDivine = document.getElementById('divine') as HTMLElement
+
+  const panorama = new ImagePanorama('/versaille.jpg')
+
+  const view = new Viewer({
+    container,
+    autoRotate: true,
+    autoRotateSpeed: -1,
+    autoRotateActivationDuration: 5000,
+    output: 'console',
+  })
+
+  view.add(panorama)
+  view.tweenControlCenter(new THREE.Vector3(-412.02, -969.71, 4879.54), 0)
+
+  const loader = new THREE.TextureLoader()
+  const texture: THREE.Texture = await new Promise((resolve) =>
+    loader.load('/sprite3_shadow.png', resolve)
+  )
+
+  for (let angle = 0; angle < 2.0 * Math.PI; angle += (Math.PI * 2) / 5) {
+    const textureScale = 3
+    const geometry = new THREE.PlaneGeometry(
+      258 * textureScale,
+      693 * textureScale
+    )
+    const material = new THREE.MeshBasicMaterial({
+      map: texture,
+      opacity: 1,
+      side: THREE.DoubleSide,
+      transparent: true,
+    })
+
+    // Offset the hotspot so it is below the view origin [Updated]
+    const radius = 4000
+    const sprite = new THREE.Mesh(geometry, material)
+    sprite.position.set(
+      radius * Math.cos(angle),
+      -969.71,
+      radius * Math.sin(angle)
+    )
+    sprite.position.multiplyScalar(0.7)
+    const rotation = new THREE.Matrix4()
+    rotation.makeRotationAxis(new THREE.Vector3(0, 1, 0), -angle + 3.1415 / 2)
+    view.add(sprite)
+    sprite.rotation.setFromRotationMatrix(rotation)
+
+    const infospot1 = new Infospot(20)
+    const scale = 0.1
+    infospot1.position.set(
+      -radius * Math.cos(angle),
+      -1500,
+      -radius * Math.sin(angle)
+    )
+    infospot1.position.multiplyScalar(scale)
+    infospot1.addHoverElement(descDivine, -container.offsetTop + 220)
+    panorama.add(infospot1)
+  }
+}
+
 export default {
   data: () => {
-    if (!process.browser) {
-      return
+    if (process.browser) {
+      main()
     }
-    import('@enra-gmbh/panolens').then(
-      ({ ImagePanorama, Viewer, Infospot }) => {
-        const container = document.querySelector('#panolens') as HTMLElement
-        const descDivine = document.getElementById('divine') as HTMLElement
-
-        const panorama = new ImagePanorama('/versaille.jpg')
-
-        const infospot1 = new Infospot(40)
-        const scale = 0.1
-        infospot1.position.set(419.62, -1951.18, 4580.0)
-        infospot1.position.multiplyScalar(scale)
-        infospot1.addHoverElement(descDivine, -container.offsetTop + 220)
-        panorama.add(infospot1)
-
-        const view = new Viewer({
-          container,
-          autoRotate: true,
-          autoRotateSpeed: -1,
-          autoRotateActivationDuration: 5000,
-          output: 'console',
-        })
-
-        view.add(panorama)
-        view.tweenControlCenter(new THREE.Vector3(-412.02, -969.71, 4879.54), 0)
-
-        const loader = new THREE.TextureLoader()
-        loader.load('/sprite3.png', function (texture) {
-          const scale = 3
-          const geometry = new THREE.PlaneGeometry(258 * scale, 693 * scale)
-          const material = new THREE.MeshBasicMaterial({
-            map: texture,
-            opacity: 1,
-            side: THREE.DoubleSide,
-            transparent: true,
-          })
-
-          const sprite = new THREE.Mesh(geometry, material)
-
-          // Offset the hotspot so it is below the view origin [Updated]
-          sprite.position.set(-412.02, -969.71, 4879.54)
-          sprite.position.multiplyScalar(0.7)
-
-          const rotation = new THREE.Matrix4()
-          rotation.makeRotationAxis(new THREE.Vector3(0, 1, 0), 0.0 + 3.1415)
-          view.add(sprite)
-          sprite.rotation.setFromRotationMatrix(rotation)
-        })
-      }
-    )
+    return {}
   },
 }
 </script>
