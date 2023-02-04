@@ -5,11 +5,9 @@
       <a href="https://google.com">Services</a>
     </div>
     <div class="row">
-      <a href="https://google.com">facebook</a>
-      <a href="https://google.com">instagram</a>
-      <a href="https://google.com">twitter</a>
-      <a href="https://google.com">linkedin</a>
-      <a href="https://google.com">pinterest</a>
+      <a href="https://www.facebook.com/DVCreationsLuxe">facebook</a>
+      <a href="https://www.instagram.com/dvcreationsluxe/">instagram</a>
+      <a href="https://www.linkedin.com/company/dv-créations-luxe">linkedin</a>
     </div>
     <p id="copyright">Copyright 2023 Haute Joaillerie. Tous droits réservés.</p>
   </footer>
@@ -43,6 +41,11 @@ a {
 
 a:hover {
   color: black;
+}
+
+a:link,
+a:visited {
+  color: #bdc3c7;
 }
 
 #copyright {
