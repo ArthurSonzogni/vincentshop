@@ -1339,6 +1339,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@diracleo/vue-enlargeable-image@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@diracleo/vue-enlargeable-image@npm:0.0.7"
+  peerDependencies:
+    vue: ^2.6.11
+  checksum: 3669447a8b0cfab672d4852144db1ccc3a1b3c2360f8c0a160401d122e994f5522cbbdd6817522d5f726c2e7ea01dff4b41481008063bbce91c9a9671ee7338d
+  languageName: node
+  linkType: hard
+
 "@enra-gmbh/panolens@npm:^0.0.11":
   version: 0.0.11
   resolution: "@enra-gmbh/panolens@npm:0.0.11"
@@ -14510,6 +14519,7 @@ __metadata:
   resolution: "vincentshop@workspace:."
   dependencies:
     "@babel/eslint-parser": ^7.19.1
+    "@diracleo/vue-enlargeable-image": ^0.0.7
     "@enra-gmbh/panolens": ^0.0.11
     "@nuxt/content": ^1.0.0
     "@nuxt/types": ^2.15.8

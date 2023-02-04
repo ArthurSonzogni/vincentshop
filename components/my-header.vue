@@ -5,6 +5,12 @@
   </header>
 </template>
 
+<script lang="ts">
+export default {
+  data: () => {},
+}
+</script>
+
 <style scoped>
 header {
   padding-bottom: 40px;
