@@ -15,12 +15,14 @@
     </div>
 
     <div id="divine" style="display: none">
-      <div class="text">
-        <h1>HAUTE JOAILLERIE</h1>
-        <h2>Collection Divine</h2>
-        <h3>Création « Divine »..</h3>
-      </div>
-      <img src="/DSC_8743-12.jpg" />
+      <a href="/divine">
+        <div class="text">
+          <h1>HAUTE JOAILLERIE</h1>
+          <h2>Collection Divine</h2>
+          <h3>Création « Divine »..</h3>
+        </div>
+        <img src="/DSC_8743-12.jpg" />
+      </a>
     </div>
   </div>
 </template>
@@ -79,7 +81,7 @@ const main = async () => {
     )
     sprite.position.multiplyScalar(0.7)
     const rotation = new THREE.Matrix4()
-    rotation.makeRotationAxis(new THREE.Vector3(0, 1, 0), -angle + 3.1415 / 2)
+    rotation.makeRotationAxis(new THREE.Vector3(0, 1, 0), -angle - 3.1415 / 2)
     view.add(sprite)
     sprite.rotation.setFromRotationMatrix(rotation)
 
@@ -141,9 +143,15 @@ export default {
 }
 
 #divine img {
-  margin: 0;
-  padding: 0;
   width: 100%;
+  padding: 0;
+  margin: 0;
+  margin-bottom: -4px;
+}
+
+#divine a {
+  color: black;
+  text-decoration: none;
 }
 
 h1,
