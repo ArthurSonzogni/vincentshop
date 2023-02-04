@@ -27,7 +27,7 @@
     "core-js": "^3.25.3",
     "nuxt": "^2.15.8",
     "nuxt-custom-headers": "^2.1.0",
-    "vue": "2.7.14",
+    "vue": "3.2.47",
     "vue-server-renderer": "",
     "vue-template-compiler": ""
   },
